@@ -1,0 +1,33 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  zmicro gzcaas <args ...>"
+  echo ""
+
+  gzcaas --help
+}
+
+version() {
+  gzcaas --version
+}
+
+core() {
+  case $1 in
+  -h | --help | help)
+    help
+    ;;
+  -v | --version | version)
+    version
+    ;;
+  *)
+    gzcaas "$@"
+    ;;
+  esac
+}
+
+run() {
+  core "$@"
+}
+
+run "$@"
