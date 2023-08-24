@@ -2,7 +2,7 @@
 
 install() {
   # prepare vars
-  local name="$PACKAGE_CORE_NAME"
+  local name="$PACKAGE_GZCAAS_NAME"
 
   log::info "[$(timestamp)][package][$name] preparing ..."
 
@@ -15,15 +15,15 @@ install() {
   local tmp_dir="$PACKAGE_TMP_DIR"
 
   # get latest version
-  if [ -n "$PACKAGE_CORE_GIT_REPOSITORY" ]; then
+  if [ -n "$PACKAGE_GZCAAS_GIT_REPOSITORY" ]; then
     log::info "[$(timestamp)][package][$name] checking latest version ..."
-    local latest_version=$(git::get_remote_latest_tag $PACKAGE_CORE_GIT_REPOSITORY)
+    local latest_version=$(git::get_remote_latest_tag $PACKAGE_GZCAAS_GIT_REPOSITORY)
     if [ "$?" != "0" ]; then
       log::error "[$(timestamp)][package][$name] failed to get latest version ."
       return 1
     fi
-    PACKAGE_CORE_VERSION=$latest_version
-    log::success "[$(timestamp)][package][$name] latest version: $PACKAGE_CORE_VERSION"
+    PACKAGE_GZCAAS_VERSION=$latest_version
+    log::success "[$(timestamp)][package][$name] latest version: $PACKAGE_GZCAAS_VERSION"
   fi
 
   # files
@@ -40,7 +40,7 @@ install() {
   #   https://github.com/go-zoox/gzcaas/releases/download/v0.0.2/gzcaas_0.0.2_linux_amd64.tar.gz
   #   https://github.com/go-zoox/gzcaas/releases/download/v0.0.2/gzcaas_0.0.2_linux_arm64.tar.gz
   # generate url
-  local url="${PACKAGE_CORE_RELEASE_DOWNLOAD}/$PACKAGE_CORE_VERSION/${name}_${PACKAGE_CORE_VERSION#v}_${platform}_${arch}.tar.gz"
+  local url="${PACKAGE_GZCAAS_RELEASE_DOWNLOAD}/$PACKAGE_GZCAAS_VERSION/${name}_${PACKAGE_GZCAAS_VERSION#v}_${platform}_${arch}.tar.gz"
   log::debug "[$(timestamp)][package][$name][$kernel][$arch] url: $url, file: ${tmp_file}, tmp_dir: $tmp_dir"
 
   # download
